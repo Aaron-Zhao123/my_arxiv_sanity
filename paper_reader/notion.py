@@ -20,7 +20,7 @@ class ListOfPapers(BaseModel):
 
 
 class NotionDBManager:
-    def __init__(self, database_id, gpt_model="gpt-4o-2024-08-06"):
+    def __init__(self, database_id, gpt_model="gpt-4.1"):
         self.database_id = database_id
         self.notion = Client(auth=os.environ["NOTION_API_TOKEN"])
         self.oai = OpenAI()
@@ -39,7 +39,7 @@ class NotionDBManager:
         sys_prompt += f"Please return a list of papers (max {max_papers}) that are most relevant to the research interests based on the following papers:\n"
 
         print(
-            f"Found {len(papers)} relevant papers from arxiv, from the past {past_days}, filtering to {max_papers} most relevant papers."
+            f"Found {len(papers)} relevant papers from arxiv, from the past {past_days} days, filtering to {max_papers} most relevant papers."
         )
 
         prompt = "\n".join(
@@ -67,11 +67,12 @@ class NotionDBManager:
         # write a paper to the notion database
         # paper is a dict with keys: name, arxiv_id, summary
         print(paper.arxiv_id, paper.name, paper.summary)
+        url = f"https://arxiv.org/abs/{paper.arxiv_id}" if paper.arxiv_id else None
         self.notion.pages.create(
             parent={"database_id": self.database_id},
             properties={
                 "Name": {"title": [{"text": {"content": paper.name}}]},
-                "URL": {"url": paper.arxiv_id if paper.arxiv_id else None},
+                "URL": {"url": url},
                 "Abstract": {
                     "type": "rich_text",
                     "rich_text": [{"type": "text", "text": {"content": paper.summary}}],
@@ -159,13 +160,15 @@ class NotionDBManager:
                 if page["properties"]["Abstract"]["rich_text"]
                 else ""
             )
-            rating = int(page["properties"]["Rating"]["multi_select"][0]["name"])
-            if rating in ratings:
-                selected_papers[paper_name] = {
-                    "id": paper_id,
-                    "abstract": abstract,
-                    "rating": rating,
-                }
+            # if rating exists
+            if len(page["properties"]["Rating"]["multi_select"]) > 0:
+                rating = int(page["properties"]["Rating"]["multi_select"][0]["name"])
+                if rating in ratings:
+                    selected_papers[paper_name] = {
+                        "id": paper_id,
+                        "abstract": abstract,
+                        "rating": rating,
+                    }
         return selected_papers
 
     def _get_all_db_papers(self):

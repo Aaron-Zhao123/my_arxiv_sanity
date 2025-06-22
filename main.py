@@ -14,5 +14,5 @@ database_id = os.environ["NOTION_DB_ID"]
 
 db = NotionDBManager(database_id)
 prompt = db.get_user_preference(prefix)
-print(prompt)
-db.add_papers(prompt, past_days=7, max_papers=3)
+# execute daily
+db.add_papers(prompt, past_days=7, max_papers=5)
