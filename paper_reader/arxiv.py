@@ -47,11 +47,11 @@ def search_arxiv_paper_info(
             if feed.entries:
                 entry = feed.entries[0]
                 # Extract arxiv ID from the entry ID
-                arxiv_id = entry.id.split('/')[-1]
+                arxiv_id = entry.id.split("/")[-1]
                 return {
                     "abstract": entry.summary,
                     "url": f"https://arxiv.org/abs/{arxiv_id}",
-                    "arxiv_id": arxiv_id
+                    "arxiv_id": arxiv_id,
                 }
             else:
                 return None
@@ -60,7 +60,7 @@ def search_arxiv_paper_info(
             if attempt == max_retries:
                 return None
             time.sleep(retry_wait)
-    
+
     return None
 
 

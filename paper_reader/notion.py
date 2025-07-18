@@ -4,7 +4,11 @@ import json
 
 from notion_client import Client
 from openai import OpenAI
-from .arxiv import search_arxiv_abstract, search_arxiv_paper_info, get_recent_arxiv_papers
+from .arxiv import (
+    search_arxiv_abstract,
+    search_arxiv_paper_info,
+    get_recent_arxiv_papers,
+)
 from pydantic import BaseModel
 
 
@@ -122,48 +126,49 @@ class NotionDBManager:
         """Scan all existing entries and add missing URL and abstract information"""
         print("Scanning database for missing URL and abstract information...")
         updated_count = 0
-        
+
         for paper in self.my_db["results"]:
             paper_name = paper["properties"]["Name"]["title"][0]["text"]["content"]
             paper_id = paper["id"]
-            
+
             # Check if URL is missing
             url_missing = not paper["properties"]["URL"]["url"]
-            
+
             # Check if Abstract is missing
             abstract_missing = not paper["properties"]["Abstract"]["rich_text"]
-            
+
             if url_missing or abstract_missing:
                 print(f"Processing paper: {paper_name}")
-                
+
                 # Try to find paper on arxiv by title
                 print(f"Searching arxiv for: {paper_name}")
-                
+
                 # Get paper info from arxiv
                 paper_info = search_arxiv_paper_info(paper_name)
-                
+
                 # Update the paper if we found missing information
                 update_properties = {}
-                
+
                 if paper_info:
                     if abstract_missing and paper_info.get("abstract"):
-                        update_properties["Abstract"] = {"rich_text": [{"text": {"content": paper_info["abstract"]}}]}
+                        update_properties["Abstract"] = {
+                            "rich_text": [{"text": {"content": paper_info["abstract"]}}]
+                        }
                         print(f"Found abstract for: {paper_name}")
-                    
+
                     if url_missing and paper_info.get("url"):
                         update_properties["URL"] = {"url": paper_info["url"]}
                         print(f"Found URL for: {paper_name}")
-                
+
                 if update_properties:
                     self.notion.pages.update(
-                        page_id=paper_id,
-                        properties=update_properties
+                        page_id=paper_id, properties=update_properties
                     )
                     updated_count += 1
                     print(f"Updated paper: {paper_name}")
                 else:
                     print(f"No additional information found for: {paper_name}")
-        
+
         print(f"Updated {updated_count} papers with missing information.")
 
     # --- helper functions ---
