@@ -74,7 +74,7 @@ def export_to_markdown(papers: List[Any], output_file: str = "./index.md") -> No
         os.makedirs(os.path.dirname(output_file), exist_ok=True)
         
         # Generate markdown content
-        markdown_content = f"""# 📚 New Research Papers
+        markdown_content = f"""# 📚 MyArxivSanity
 
 *Latest papers from arXiv based on your research interests*
 

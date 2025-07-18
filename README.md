@@ -1,4 +1,4 @@
-# Paper Reader
+# MyArxivSanity
 
 An AI-powered arXiv paper recommendation system that intelligently discovers and curates research papers based on your preferences. The system uses GPT-4 to analyze paper abstracts, learns from your ratings in a Notion database, and generates beautiful static websites to showcase recommended papers.
 
