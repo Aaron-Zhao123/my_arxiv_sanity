@@ -6,6 +6,7 @@ on:
     branches: [ main ]
     paths:
       - 'new_paper.pkl'
+      - 'docs/**'
       - 'export_papers.py'
       - '.github/workflows/jekyll-gh-pages.yml'
   workflow_dispatch:
@@ -61,10 +62,10 @@ jobs:
           
       - name: Debug - Show index.md contents
         run: |
-          echo "=== Contents of index.md ==="
-          cat index.md || echo "index.md not found"
+          echo "=== Contents of docs/index.md ==="
+          cat docs/index.md || echo "docs/index.md not found"
           echo "=== CSS file exists? ==="
-          ls -la assets/css/style.scss || echo "CSS file not found"
+          ls -la docs/assets/css/style.scss || echo "CSS file not found"
           
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -72,7 +73,7 @@ jobs:
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./
+          source: ./docs
           destination: ./_site
           
       - name: Upload artifact

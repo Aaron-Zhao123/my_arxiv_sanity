@@ -86,14 +86,18 @@ paper_reader/
 │   ├── paper.py           # Pydantic models for Paper and ListOfPapers
 │   ├── notion.py          # Notion database integration
 │   └── arxiv.py           # arXiv API client
+├── docs/                  # Jekyll static site
+│   ├── assets/           # CSS and other assets
+│   │   └── css/
+│   │       └── style.scss # Custom styling
+│   ├── index.md          # Generated papers page
+│   └── _config.yml       # Jekyll configuration
 ├── main.py               # Main entry point
 ├── export_papers.py      # Export utilities
 ├── local_update.py       # Local update script
 ├── justfile             # Build commands
-├── _config.yml          # Jekyll configuration
 ├── new_paper.pkl        # Recently discovered papers
-├── preference.pkl       # User preference profile
-└── index.md            # Markdown export of papers (Jekyll site)
+└── preference.pkl       # User preference profile
 ```
 
 ## How It Works
