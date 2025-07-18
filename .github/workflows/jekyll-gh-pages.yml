@@ -63,6 +63,8 @@ jobs:
         run: |
           echo "=== Contents of index.md ==="
           cat index.md || echo "index.md not found"
+          echo "=== CSS file exists? ==="
+          ls -la assets/css/style.scss || echo "CSS file not found"
           
       - name: Setup Pages
         uses: actions/configure-pages@v5
