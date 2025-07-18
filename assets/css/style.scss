@@ -1,0 +1,168 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f9fa;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+h1 {
+  color: #2c3e50;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  font-size: 2.5em;
+}
+
+h2 {
+  color: #34495e;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 8px;
+  font-size: 1.4em;
+}
+
+h3 {
+  color: #2c3e50;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+}
+
+p {
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+strong {
+  color: #2c3e50;
+}
+
+a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+.paper-meta {
+  background-color: #ecf0f1;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #3498db;
+}
+
+.paper-meta strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.arxiv-link {
+  display: inline-block;
+  background-color: #e74c3c;
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.arxiv-link:hover {
+  background-color: #c0392b;
+  text-decoration: none;
+}
+
+.stats {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.stats strong {
+  color: #ecf0f1;
+  font-size: 1.1em;
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin: 40px 0;
+  border-radius: 2px;
+}
+
+.abstract {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #95a5a6;
+  margin-top: 15px;
+  line-height: 1.7;
+}
+
+.no-papers {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 10px;
+  margin: 40px 0;
+}
+
+.no-papers h2 {
+  background: none;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    margin: 10px;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  h1 {
+    font-size: 2em;
+  }
+  
+  h2 {
+    font-size: 1.2em;
+    padding: 10px 15px;
+  }
+  
+  .paper-meta {
+    padding: 10px;
+  }
+  
+  .stats {
+    padding: 15px;
+  }
+}

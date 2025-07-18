@@ -78,8 +78,10 @@ def export_to_markdown(papers: List[Any], output_file: str = "./index.md") -> No
 
 *Latest papers from arXiv based on your research interests*
 
-**Last Updated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}  
-**Total Papers:** {len(papers_data)}
+<div class="stats">
+<strong>Last Updated:</strong> {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}<br>
+<strong>Total Papers:</strong> {len(papers_data)}
+</div>
 
 ---
 
@@ -87,9 +89,10 @@ def export_to_markdown(papers: List[Any], output_file: str = "./index.md") -> No
         
         if not papers_data:
             markdown_content += """
-## No New Papers Found
-
-Check back later for new research papers!
+<div class="no-papers">
+<h2>No New Papers Found</h2>
+<p>Check back later for new research papers!</p>
+</div>
 
 ---
 
@@ -107,17 +110,20 @@ Check back later for new research papers!
                 authors_text = f"**Authors:** {authors}" if authors else ""
                 
                 # Format arXiv link
-                arxiv_link = f"[📄 View on arXiv](https://arxiv.org/abs/{arxiv_id})" if arxiv_id else ""
+                arxiv_link = f'<a href="https://arxiv.org/abs/{arxiv_id}" class="arxiv-link">📄 View on arXiv</a>' if arxiv_id else ""
                 
                 markdown_content += f"""
 ## {i}. {title}
 
+<div class="paper-meta">
 {authors_text}
-
 {arxiv_link}
+</div>
 
 ### Abstract
+<div class="abstract">
 {summary}
+</div>
 
 ---
 
