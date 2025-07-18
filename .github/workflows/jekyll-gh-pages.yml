@@ -6,7 +6,6 @@ on:
     branches: [ main ]
     paths:
       - 'new_paper.pkl'
-      - 'docs/**'
       - 'export_papers.py'
       - '.github/workflows/jekyll-gh-pages.yml'
   workflow_dispatch:
@@ -64,31 +63,6 @@ jobs:
         run: |
           echo "=== Contents of index.md ==="
           cat index.md || echo "index.md not found"
-          echo "=== Contents of docs/index.md ==="
-          cat docs/index.md || echo "docs/index.md not found"
-          
-      - name: Create empty markdown if no papers
-        if: steps.check_file.outputs.pickle_exists == 'false'
-        run: |
-          mkdir -p docs
-          cat > docs/index.md << 'EOF'
-          # 📚 MyArxivSanity 
-          
-          *Latest papers from arXiv based on your research interests*
-          
-          **Last Updated:** $(date '+%Y-%m-%d %H:%M:%S')  
-          **Total Papers:** 0
-          
-          ---
-          
-          ## No New Papers Found
-          
-          Check back later for new research papers!
-          
-          ---
-          
-          *This page is automatically updated when new papers are added to your collection.*
-          EOF
           
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -96,7 +70,7 @@ jobs:
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./docs
+          source: ./
           destination: ./_site
           
       - name: Upload artifact
