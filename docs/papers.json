@@ -1,0 +1,24 @@
+{
+  "papers": [
+    {
+      "name": "MC$^2$A: Enabling Algorithm-Hardware Co-Design for Efficient Markov Chain Monte Carlo Acceleration",
+      "arxiv_id": "2507.12935v1",
+      "summary": "Proposes a system-level algorithm-hardware co-design for efficient acceleration of Markov Chain Monte Carlo (MCMC) methods, relevant for improving the efficiency of ML models. MC$^2$A introduces a flexible, general hardware architecture optimized for a range of MCMC workloads, addressing real-world deployment and scalable infrastructure for ML systems.",
+      "authors": "Shirui Zhao et al."
+    },
+    {
+      "name": "Characterizing State Space Model (SSM) and SSM-Transformer Hybrid Language Model Performance with Long Context Length",
+      "arxiv_id": "2507.12442v1",
+      "summary": "Benchmarks and analyzes the performance of emerging SSM and SSM-Transformer hybrid architectures for language models with long context lengths. Focuses on system-level, device-aware evaluation and optimization, bridging architectural innovation and real-world scalable deployment. Accompanied by open-source benchmarking tools to facilitate reproducibility and further research.",
+      "authors": "Saptarshi Mitra et al."
+    },
+    {
+      "name": "Elk: Exploring the Efficiency of Inter-core Connected AI Chips with Deep Learning Compiler Techniques",
+      "arxiv_id": "2507.11506v1",
+      "summary": "Examines system-level software and compiler optimizations for multi-core AI accelerators, focusing on deep learning workloads. Proposes techniques to improve memory layout, workload mapping, and resource utilization, underscoring the software–hardware co-design needed for scalable and efficient ML deployment.",
+      "authors": "Yiqi Liu et al."
+    }
+  ],
+  "last_updated": "2025-07-18T01:42:38.342673",
+  "count": 3
+}
