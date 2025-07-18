@@ -60,7 +60,7 @@ def convert_paper_to_dict(paper) -> Dict[str, Any]:
         }
 
 
-def export_to_markdown(papers: List[Any], output_file: str = "docs/index.md") -> None:
+def export_to_markdown(papers: List[Any], output_file: str = "./index.md") -> None:
     """Export papers to markdown format"""
     try:
         # Convert papers to dict format
