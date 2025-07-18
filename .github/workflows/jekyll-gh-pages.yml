@@ -60,6 +60,13 @@ jobs:
         run: |
           uv run python export_papers.py
           
+      - name: Debug - Show index.md contents
+        run: |
+          echo "=== Contents of index.md ==="
+          cat index.md || echo "index.md not found"
+          echo "=== Contents of docs/index.md ==="
+          cat docs/index.md || echo "docs/index.md not found"
+          
       - name: Create empty markdown if no papers
         if: steps.check_file.outputs.pickle_exists == 'false'
         run: |
