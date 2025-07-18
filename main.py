@@ -49,7 +49,7 @@ def main():
                        help='Add papers to Notion database')
     parser.add_argument('--days', type=int, default=7,
                        help='Number of past days to search papers (default: 7)')
-    parser.add_argument('--max-papers', type=int, default=5,
+    parser.add_argument('--max-papers', type=int, default=10,
                        help='Maximum number of papers to add (default: 5)')
     parser.add_argument('--preference-file', type=str, default='preference.pkl',
                        help='Path to preference file (default: preference.pkl)')
@@ -68,7 +68,7 @@ def main():
             new_papers = db.add_papers(prompt, past_days=args.days, max_papers=args.max_papers)
             save_new_papers(new_papers)
     
-    # If no arguments provided, run default behavior
+    # If no arguments provided, run default behavior, house keeping daily runs
     if not any([args.generate_preference, args.refresh_preference, args.add_papers]):
         prompt = load_preference(args.preference_file)
         if not prompt:
