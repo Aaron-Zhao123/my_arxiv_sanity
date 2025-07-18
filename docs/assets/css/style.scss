@@ -1,168 +1,119 @@
----
----
+--- --- @import "{{ site.theme }}";
 
-@import "{{ site.theme }}";
-
+/* Dark theme override */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.6;
-  color: #333;
-  background-color: #f8f9fa;
+  background-color: #1a1a1a;
+  color: #e6e6e6;
 }
 
 .wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: white;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
-  border-radius: 10px;
-  margin-top: 20px;
+  background-color: #1a1a1a;
 }
 
-h1 {
-  color: #2c3e50;
-  border-bottom: 3px solid #3498db;
-  padding-bottom: 10px;
-  margin-bottom: 30px;
-  font-size: 2.5em;
+header {
+  background-color: #2d2d2d;
+  color: #e6e6e6;
+  border-bottom: 1px solid #444;
 }
 
-h2 {
-  color: #34495e;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  padding: 15px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border-radius: 8px;
-  font-size: 1.4em;
+header h1 {
+  color: #ffffff;
 }
 
-h3 {
-  color: #2c3e50;
-  margin-top: 20px;
-  margin-bottom: 15px;
-  font-size: 1.2em;
+header p {
+  color: #cccccc;
 }
 
-p {
-  margin-bottom: 15px;
-  text-align: justify;
-}
-
-strong {
-  color: #2c3e50;
-}
-
+/* Links */
 a {
-  color: #3498db;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  color: #66b3ff;
 }
 
 a:hover {
-  color: #2980b9;
-  text-decoration: underline;
+  color: #99ccff;
 }
 
-.paper-meta {
-  background-color: #ecf0f1;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  border-left: 4px solid #3498db;
+/* Headers */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #ffffff;
 }
 
-.paper-meta strong {
-  display: block;
-  margin-bottom: 8px;
+/* Code blocks */
+pre {
+  background-color: #2d2d2d;
+  border: 1px solid #444;
+  color: #e6e6e6;
 }
 
-.arxiv-link {
-  display: inline-block;
-  background-color: #e74c3c;
-  color: white !important;
-  padding: 8px 16px;
-  border-radius: 5px;
-  font-weight: bold;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
+code {
+  background-color: #2d2d2d;
+  color: #e6e6e6;
 }
 
-.arxiv-link:hover {
-  background-color: #c0392b;
-  text-decoration: none;
+/* Tables */
+table {
+  border-collapse: collapse;
+  background-color: #2d2d2d;
 }
 
-.stats {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 30px;
-  text-align: center;
+table th {
+  background-color: #404040;
+  color: #ffffff;
+  border: 1px solid #555;
 }
 
-.stats strong {
-  color: #ecf0f1;
-  font-size: 1.1em;
+table td {
+  border: 1px solid #555;
+  color: #e6e6e6;
 }
 
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid #66b3ff;
+  background-color: #2d2d2d;
+  color: #e6e6e6;
+}
+
+/* HR */
 hr {
-  border: none;
-  height: 2px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  margin: 40px 0;
-  border-radius: 2px;
+  border-color: #444;
 }
 
-.abstract {
-  background-color: #f8f9fa;
-  padding: 20px;
-  border-radius: 8px;
-  border-left: 4px solid #95a5a6;
-  margin-top: 15px;
-  line-height: 1.7;
+/* Button styling for arXiv links */
+a[href*="arxiv.org"] {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9em;
+  margin: 5px 0;
+  border: 1px solid #555;
 }
 
-.no-papers {
-  text-align: center;
-  padding: 60px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border-radius: 10px;
-  margin: 40px 0;
+a[href*="arxiv.org"]:hover {
+  background-color: #555;
+  color: #fff;
 }
 
-.no-papers h2 {
-  background: none;
-  color: white;
-  margin: 0;
-  padding: 0;
+/* Paper styling */
+h2:not(:first-of-type) {
+  margin-top: 2em;
+  padding-top: 1em;
+  border-top: 1px solid #444;
 }
 
-@media (max-width: 768px) {
-  .wrapper {
-    margin: 10px;
-    padding: 15px;
-    border-radius: 5px;
-  }
-  
-  h1 {
-    font-size: 2em;
-  }
-  
-  h2 {
-    font-size: 1.2em;
-    padding: 10px 15px;
-  }
-  
-  .paper-meta {
-    padding: 10px;
-  }
-  
-  .stats {
-    padding: 15px;
-  }
+h3 {
+  color: #cccccc;
+  margin-top: 1.5em;
+}
+
+strong {
+  color: #ffffff;
 }
