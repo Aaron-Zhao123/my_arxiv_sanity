@@ -31,6 +31,39 @@ def search_arxiv_abstract(
             time.sleep(retry_wait)
 
 
+def search_arxiv_paper_info(
+    paper_title, max_results=1, timeout=5, max_retries=3, retry_wait=2
+):
+    """Search for paper information including abstract and URL"""
+    search_query = 'ti:"{}"'.format(paper_title)
+    url = f"https://export.arxiv.org/api/query?search_query={search_query}&start=0&max_results={max_results}"
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            response = requests.get(url, timeout=timeout)
+            response.raise_for_status()
+            feed = feedparser.parse(response.text)
+
+            if feed.entries:
+                entry = feed.entries[0]
+                # Extract arxiv ID from the entry ID
+                arxiv_id = entry.id.split('/')[-1]
+                return {
+                    "abstract": entry.summary,
+                    "url": f"https://arxiv.org/abs/{arxiv_id}",
+                    "arxiv_id": arxiv_id
+                }
+            else:
+                return None
+
+        except (requests.exceptions.RequestException, Exception) as e:
+            if attempt == max_retries:
+                return None
+            time.sleep(retry_wait)
+    
+    return None
+
+
 def get_recent_arxiv_papers(max_results=1000, days_ago=1):
     assert 0 < days_ago, "days_ago should be be greater than 0"
     # Compute date range in arXiv format: 20240614

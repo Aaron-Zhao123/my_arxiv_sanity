@@ -2,3 +2,4 @@ notion-client
 requests
 feedparser
 openai
+gradio

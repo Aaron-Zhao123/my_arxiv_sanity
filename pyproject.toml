@@ -1,0 +1,12 @@
+[project]
+name = "paper-reader"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "feedparser>=6.0.11",
+    "notion-client>=2.4.0",
+    "openai>=1.97.0",
+    "requests>=2.32.4",
+]

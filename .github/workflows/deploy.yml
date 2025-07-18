@@ -1,0 +1,101 @@
+name: Deploy Markdown Site
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'new_paper.pkl'
+      - 'docs/**'
+      - 'export_papers.py'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+  schedule:
+    # Run daily at 9 AM UTC to check for new papers
+    - cron: '0 9 * * *'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Only install pickle (built-in) - no external dependencies needed
+          
+      - name: Check if new_paper.pkl exists
+        id: check_file
+        run: |
+          if [ -f new_paper.pkl ]; then
+            echo "pickle_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "pickle_exists=false" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Convert pickle to markdown
+        run: |
+          python export_papers.py
+          
+      - name: Create empty markdown if no papers
+        if: steps.check_file.outputs.pickle_exists == 'false'
+        run: |
+          mkdir -p docs
+          cat > docs/index.md << 'EOF'
+          # 📚 New Research Papers
+          
+          *Latest papers from arXiv based on your research interests*
+          
+          **Last Updated:** $(date '+%Y-%m-%d %H:%M:%S')  
+          **Total Papers:** 0
+          
+          ---
+          
+          ## No New Papers Found
+          
+          Check back later for new research papers!
+          
+          ---
+          
+          *This page is automatically updated when new papers are added to your collection.*
+          EOF
+          
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+        
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./docs
+          destination: ./_site
+          
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
