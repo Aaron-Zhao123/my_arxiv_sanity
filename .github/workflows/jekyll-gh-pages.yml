@@ -65,7 +65,7 @@ jobs:
         run: |
           mkdir -p docs
           cat > docs/index.md << 'EOF'
-          # 📚 New Research Papers
+          # 📚 MyArxivSanity 
           
           *Latest papers from arXiv based on your research interests*
           

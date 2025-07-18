@@ -50,8 +50,9 @@ An AI-powered arXiv paper recommendation system that intelligently discovers and
 	Add the following line to run the script every day at 11 AM:
 
 	```bash
-	0 11 * * * your/python/bin /path/to/your/script/main.py
+	0 11 * * * cd your_path/paper_reader && /opt/homebrew/bin/just local_update >> /tmp/paper_reader.log 2>&1
 	```
+	Notice `/opt/homebrew/bin/just` is the path to the `just` command.
 
 ### Usage
 
