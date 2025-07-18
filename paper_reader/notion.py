@@ -9,19 +9,7 @@ from .arxiv import (
     search_arxiv_paper_info,
     get_recent_arxiv_papers,
 )
-from pydantic import BaseModel
-
-
-class Paper(BaseModel):
-    name: str
-    arxiv_id: str
-    summary: str
-    authors: str
-
-
-class ListOfPapers(BaseModel):
-    papers: list[Paper]
-
+from .paper import Paper, ListOfPapers
 
 class NotionDBManager:
     def __init__(self, database_id, gpt_model="gpt-4.1"):

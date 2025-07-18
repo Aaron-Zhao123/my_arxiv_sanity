@@ -1,12 +1,26 @@
-# What is this?
+# Paper Reader
 
-My Arxiv Sanity, a tool that recommends papers to read by crawling arxiv. How does it decide on the most relevant papers? It is powered by GPT...
-Papers are fetched from arxiv, and then the script uses OpenAI's GPT to analyze the papers and recommend the most relevant ones based on your preferences.
-These papers are then stored in a Notion database, which you can use to keep track of your reading list.
+An AI-powered arXiv paper recommendation system that intelligently discovers and curates research papers based on your preferences. The system uses GPT-4 to analyze paper abstracts, learns from your ratings in a Notion database, and generates beautiful static websites to showcase recommended papers.
 
-# Quick setup guide
+## Key Features
 
-### Setups
+- **Intelligent Paper Discovery**: Automatically searches arXiv for recent papers in ML/AI categories
+- **Personalized Recommendations**: Uses GPT-4 to analyze and rank papers based on your learned preferences
+- **Notion Integration**: Stores papers in a structured Notion database for easy tracking and review
+- **Static Site Generation**: Creates responsive web interfaces for browsing recommendations
+- **Automated Workflows**: Supports scheduled runs with automatic deployment to GitHub Pages
+- **Multi-format Export**: Generates both JSON and Markdown outputs for flexible usage
+
+## Quick Setup Guide
+
+### Prerequisites
+
+- Python 3.12+ with UV package manager
+- [Just](https://github.com/casey/just) command runner
+- OpenAI API key
+- Notion workspace and integration
+
+### Environment Setup
 
 1. Make sure you follow the guide [here](https://developers.notion.com/docs/create-a-notion-integration) to build a Notion integration.
 2. Create a new database in Notion. The expected setup is to have the following entries:
@@ -39,19 +53,60 @@ These papers are then stored in a Notion database, which you can use to keep tra
 	0 11 * * * your/python/bin /path/to/your/script/main.py
 	```
 
-### Install dependencies
+### Usage
 
-I assume you have an up-to-date Python version, and `justfile` installed. If not, you should install them first.
-
-The rest of the dependencies can be installed using `just`:
+#### Run the Paper Recommendation System
 
 ```bash
-just install
-```
+# Run once to test
+just run
 
-
-### Run it once to test
-
-```bash
+# Or directly with python
 python main.py
 ```
+
+#### Export Papers to Static Site
+
+```bash
+# Export papers to markdown and JSON formats
+python export_papers.py
+```
+
+#### Available Commands
+
+- `just run`: Execute the main paper discovery and recommendation process
+- `just local_update`: Run the system and automatically commit changes to pickle files
+
+## Project Structure
+
+```
+paper_reader/
+├── paper_reader/           # Core package
+│   ├── paper.py           # Pydantic models for Paper and ListOfPapers
+│   ├── notion.py          # Notion database integration
+│   └── arxiv.py           # arXiv API client
+├── docs/                  # Jekyll static site
+│   ├── index.html         # Interactive web interface
+│   ├── papers.json        # Current papers data
+│   └── _config.yml        # Jekyll configuration
+├── main.py               # Main entry point
+├── export_papers.py      # Export utilities
+├── local_update.py       # Local update script
+├── justfile             # Build commands
+├── new_paper.pkl        # Recently discovered papers
+├── preference.pkl       # User preference profile
+└── index.md            # Markdown export of papers
+```
+
+## How It Works
+
+1. **Paper Discovery**: Searches arXiv for recent papers in ML/AI categories (cs.LG, cs.AI, cs.AR)
+2. **Preference Learning**: Analyzes your ratings in the Notion database to build a preference profile
+3. **Intelligent Ranking**: Uses GPT-4 to analyze paper abstracts and rank relevance based on your preferences
+4. **Data Storage**: Stores new papers in the Notion database with structured metadata
+5. **Static Site Generation**: Creates beautiful web interfaces for browsing recommendations
+6. **Automated Deployment**: Supports GitHub Actions for automatic website updates
+
+## Deployment
+
+The project includes GitHub Actions workflow for automatic deployment to GitHub Pages. Papers are automatically exported to a Jekyll-based static site for easy browsing and sharing.

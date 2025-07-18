@@ -1,24 +1,30 @@
 {
   "papers": [
     {
+      "name": "Pimba: A Processing-in-Memory Acceleration for Post-Transformer Large Language Model Serving",
+      "arxiv_id": "2507.10178",
+      "summary": "The paper proposes Pimba, a system for scalable and efficient serving of large language models (LLMs), especially those using post-Transformer architectures. It addresses memory bandwidth bottlenecks via algorithm-hardware co-design and explores quantization and other strategies to optimize both performance and deployment. The work is central to system-level efficiency and practical LLM infrastructure.",
+      "authors": "Not specified in excerpt"
+    },
+    {
       "name": "MC$^2$A: Enabling Algorithm-Hardware Co-Design for Efficient Markov Chain Monte Carlo Acceleration",
-      "arxiv_id": "2507.12935v1",
-      "summary": "Proposes a system-level algorithm-hardware co-design for efficient acceleration of Markov Chain Monte Carlo (MCMC) methods, relevant for improving the efficiency of ML models. MC$^2$A introduces a flexible, general hardware architecture optimized for a range of MCMC workloads, addressing real-world deployment and scalable infrastructure for ML systems.",
-      "authors": "Shirui Zhao et al."
+      "arxiv_id": "2507.12935",
+      "summary": "MC$^2$A demonstrates an efficient, scalable algorithm-hardware co-design for accelerating Markov Chain Monte Carlo (MCMC), critical for ML inference. It emphasizes end-to-end efficiency and evaluates real-world workloads, providing a framework for bridging system/algorithm interface—a key aspect of modern scalable ML system design.",
+      "authors": "Not specified in excerpt"
     },
     {
       "name": "Characterizing State Space Model (SSM) and SSM-Transformer Hybrid Language Model Performance with Long Context Length",
-      "arxiv_id": "2507.12442v1",
-      "summary": "Benchmarks and analyzes the performance of emerging SSM and SSM-Transformer hybrid architectures for language models with long context lengths. Focuses on system-level, device-aware evaluation and optimization, bridging architectural innovation and real-world scalable deployment. Accompanied by open-source benchmarking tools to facilitate reproducibility and further research.",
-      "authors": "Saptarshi Mitra et al."
+      "arxiv_id": "2507.12442",
+      "summary": "This paper benchmarks and analyzes inference performance, scaling, and hardware bottlenecks for SSM and hybrid SSM-Transformer language models over long context lengths. The work provides insights into hardware-aware evaluation, informing future system/algorithm co-design for efficient deployment and optimization of new ML paradigms.",
+      "authors": "Not specified in excerpt"
     },
     {
       "name": "Elk: Exploring the Efficiency of Inter-core Connected AI Chips with Deep Learning Compiler Techniques",
-      "arxiv_id": "2507.11506v1",
-      "summary": "Examines system-level software and compiler optimizations for multi-core AI accelerators, focusing on deep learning workloads. Proposes techniques to improve memory layout, workload mapping, and resource utilization, underscoring the software–hardware co-design needed for scalable and efficient ML deployment.",
-      "authors": "Yiqi Liu et al."
+      "arxiv_id": "2507.11506",
+      "summary": "Elk explores infrastructure-level efficiency through examining inter-core connectivity of AI chips, combined with innovations in deep learning compiler techniques. The work is relevant for optimizing data center-scale AI and LLM inference deployment, particularly at the intersection of infrastructure and software/hardware co-design.",
+      "authors": "Not specified in excerpt"
     }
   ],
-  "last_updated": "2025-07-18T01:42:38.342673",
-  "count": 3
+  "last_updated": "2025-07-18T13:32:52.999926",
+  "count": 4
 }

@@ -1,3 +1,5 @@
+run:
+	uv run python main.py
 format:
 	black main.py
 	black paper_reader/*
