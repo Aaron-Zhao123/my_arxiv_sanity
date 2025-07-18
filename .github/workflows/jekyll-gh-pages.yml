@@ -2,12 +2,17 @@
 name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
-  # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
+    branches: [ main ]
+    paths:
+      - 'new_paper.pkl'
+      - 'docs/**'
+      - 'export_papers.py'
+      - '.github/workflows/jekyll-gh-pages.yml'
   workflow_dispatch:
+  schedule:
+    # Run daily at 9 AM UTC to check for new papers
+    - cron: '0 9 * * *'
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -28,13 +33,62 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # Only install pickle (built-in) - no external dependencies needed
+          
+      - name: Check if new_paper.pkl exists
+        id: check_file
+        run: |
+          if [ -f new_paper.pkl ]; then
+            echo "pickle_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "pickle_exists=false" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Convert pickle to markdown
+        run: |
+          python export_papers.py
+          
+      - name: Create empty markdown if no papers
+        if: steps.check_file.outputs.pickle_exists == 'false'
+        run: |
+          mkdir -p docs
+          cat > docs/index.md << 'EOF'
+          # 📚 New Research Papers
+          
+          *Latest papers from arXiv based on your research interests*
+          
+          **Last Updated:** $(date '+%Y-%m-%d %H:%M:%S')  
+          **Total Papers:** 0
+          
+          ---
+          
+          ## No New Papers Found
+          
+          Check back later for new research papers!
+          
+          ---
+          
+          *This page is automatically updated when new papers are added to your collection.*
+          EOF
+          
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./
+          source: ./docs
           destination: ./_site
+          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
