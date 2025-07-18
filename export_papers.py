@@ -6,6 +6,7 @@ Script to convert new_paper.pkl to markdown format for static website.
 import pickle
 import json
 import os
+import pydantic
 from datetime import datetime
 from typing import List, Dict, Any
 
