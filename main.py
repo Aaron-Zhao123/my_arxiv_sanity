@@ -34,13 +34,15 @@ def load_preference(file_path="preference.pkl"):
 
 
 def save_new_papers(new_papers, output_file="new_paper.pkl"):
-    """Save new papers to pickle file"""
+    """Save new papers to pickle file only if new papers are found"""
     if new_papers:
         with open(output_file, "wb") as f:
             pickle.dump(new_papers, f)
         print(f"Saved {len(new_papers)} new papers to {output_file}")
+        return True
     else:
-        print("No new papers to save.")
+        print("No new papers found. Not generating pickle file.")
+        return False
 
 
 def main():
@@ -67,7 +69,7 @@ def main():
     parser.add_argument(
         "--max-papers",
         type=int,
-        default=10,
+        default=20,
         help="Maximum number of papers to add (default: 5)",
     )
     parser.add_argument(
@@ -91,7 +93,10 @@ def main():
             new_papers = db.add_papers(
                 prompt, past_days=args.days, max_papers=args.max_papers
             )
-            save_new_papers(new_papers)
+            has_new_papers = save_new_papers(new_papers)
+            if has_new_papers:
+                # Regenerate preference file only if new papers were added
+                generate_preference(db, prefix, args.preference_file)
 
     # If no arguments provided, run default behavior, house keeping daily runs
     if not any([args.generate_preference, args.refresh_preference, args.add_papers]):
@@ -101,7 +106,10 @@ def main():
         new_papers = db.add_papers(
             prompt, past_days=args.days, max_papers=args.max_papers
         )
-        save_new_papers(new_papers)
+        has_new_papers = save_new_papers(new_papers)
+        if has_new_papers:
+            # Regenerate preference file only if new papers were added
+            generate_preference(db, prefix, args.preference_file)
 
 
 if __name__ == "__main__":
