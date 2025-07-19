@@ -118,6 +118,8 @@ def export_to_markdown(papers: List[Any], output_file: str = "docs/index.md") ->
 {arxiv_link}
 </div>
 
+<br>
+
 ### Abstract
 <div class="abstract">
 {summary}

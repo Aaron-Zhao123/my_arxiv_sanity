@@ -117,3 +117,61 @@ h3 {
 strong {
   color: #ffffff;
 }
+
+/* Custom styling for paper sections */
+.paper-meta {
+  background-color: #2d2d2d;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #66b3ff;
+}
+
+.paper-meta strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.abstract {
+  background-color: #2d2d2d;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #999;
+  margin-top: 15px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.stats {
+  background: linear-gradient(135deg, #444 0%, #666 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.stats strong {
+  color: #ffffff;
+  font-size: 1.1em;
+}
+
+.arxiv-link {
+  display: inline-block;
+  background-color: #555 !important;
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.arxiv-link:hover {
+  background-color: #777 !important;
+  text-decoration: none;
+}
