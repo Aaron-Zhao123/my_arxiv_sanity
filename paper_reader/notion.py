@@ -42,7 +42,7 @@ class NotionDBManager:
         )
 
         plain_response = self._gpt_query(sys_prompt + prompt)
-        sys_prompt = "Extract the paper information."
+        sys_prompt = "Extract the paper information, keep the full abstract/summary."
         paper_list = self._gpt_query_formatted(
             sys_prompt=sys_prompt, prompt=plain_response, response_format=ListOfPapers
         )
