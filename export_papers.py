@@ -105,7 +105,7 @@ def export_to_markdown(papers: List[Any], output_file: str = "docs/index.md") ->
                 summary = paper.get('summary', 'No summary available.')
                 
                 # Format authors
-                authors_text = f"**Authors:** {authors}" if authors else ""
+                authors_text = f"Authors: {authors}" if authors else ""
                 
                 # Format arXiv link
                 arxiv_link = f'<a href="https://arxiv.org/abs/{arxiv_id}" class="arxiv-link">📄 View on arXiv</a>' if arxiv_id else ""
