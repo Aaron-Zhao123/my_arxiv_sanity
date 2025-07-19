@@ -74,9 +74,7 @@ def export_to_markdown(papers: List[Any], output_file: str = "docs/index.md") ->
         os.makedirs(os.path.dirname(output_file), exist_ok=True)
         
         # Generate markdown content
-        markdown_content = f"""# 📚 MyArxivSanity
-
-*Latest papers from arXiv based on your research interests*
+        markdown_content = f"""
 
 <div class="stats">
 <strong>Last Updated:</strong> {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}<br>
