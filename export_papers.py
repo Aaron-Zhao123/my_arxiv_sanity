@@ -125,7 +125,10 @@ def export_to_markdown(papers: List[Any], output_file: str = "docs/index.md") ->
 {summary}
 </div>
 
-<br>
+<div>
+  
+</div>
+
 ---
 
 """
